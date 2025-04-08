@@ -1,26 +1,22 @@
-valor_total = float(input("Insira o valor total da compra: "))
-fidelidade = input("Cliente é fidelizado?")
-print("1 = SIM")
-print("2 = NÃO")
-quant_compra = int(input("Informe a quantidade de compras do cliente: "))
-cupom = input("Cliente tem cupom?")
-print("1 = SIM")
-print("2 = NÃO")
-sim = 1
-nao = 2
-if (valor_total == "") and (fidelidade == "") and (quant_compra == "") and (cupom == ""):
-    if valor_total > 0:
-        if fidelidade != sim:
-            print("Cliente não fidelizado")
-            if cupom != sim:
-                print("Cliente não possui cupom")
-            else:
-                print("Possui cupom com 10% de desconto")   
-        else:
-            print("Fidelizado.")
+valor = input("Digite o valor total da compra: ")
+fidelizado = input("O cliente é fidelizado? (1 - Sim | 2 - Não): ")
+compras = input("Quantidade de compras já realizadas: ")
+cupom = input("O cliente tem cupom especial? (1 - Sim | 2 - Não): ")
 
-    else:
-        print("Valor incorreto!")
-
+if valor == "" or fidelizado == "" or compras == "" or cupom == "":
+    print("Houve o preenchimento incorreto de algum dado.")
 else:
-    print("Houve o preenchimento incorreto de algum dado")
+    valor = float(valor)
+    compras = int(compras)
+    if valor <= 0 or compras < 0 or (fidelizado != "1" and fidelizado != "2") or (cupom != "1" and cupom != "2"):
+        print("Houve o preenchimento incorreto de algum dado.")
+    else:
+        if (fidelizado == "1" and compras > 5) or cupom == "1":
+            desconto = valor * 0.10
+            total = valor - desconto
+            print("Cliente tem direito ao desconto.")
+        else:
+            total = valor
+            print("Cliente não tem direito ao desconto.")
+
+        print("Valor total a pagar: R$ ", round(total, 2))
